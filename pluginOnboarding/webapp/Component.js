@@ -20,21 +20,38 @@ sap.ui.define([
             // call the base component's init function
             UIComponent.prototype.init.apply(this, arguments);
 
-
+            var that = this;
             this.getModel().read("/datosLandingSet(partner='1',cuit='1')", {
-                success: function(oResponse) {
-                    if(oResponse.onboardingCompletado){
+                success: function (oResponse) {
+                    if (oResponse.onboardingCompletado) {
                         console.log("Completó el onboarding");
-                    }else{
+                    } else {
                         console.log("Aún no completó el onboarding");
+                        that.navtoOnboarding();
                     }
                 },
                 error: function (oResponse) {
                     console.log("Error al determinar si completó el onboarding");
+                    that.navtoOnboarding();
                 }
             });
 
 
+        },
+
+        navtoOnboarding: function () {
+            var c = sap.ushell.Container.getService("CrossApplicationNavigation");
+            var h = c.hrefForExternal({
+                target: {
+                    semanticObject: "Onboarding",
+                    action: "display"
+                }
+            });
+            c.toExternal({
+                target: {
+                    shellHash: h
+                }
+            });
         }
     });
 });
