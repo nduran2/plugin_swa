@@ -23,7 +23,7 @@ sap.ui.define([
             var that = this;
             this.getModel().read("/datosLandingSet(partner='1',cuit='1')", {
                 success: function (oResponse) {
-                    if (oResponse.onboardingCompletado) {
+                    if (oResponse.onBoardingCompleto) {
                         console.log("Completó el onboarding");
                     } else {
                         console.log("Aún no completó el onboarding");
