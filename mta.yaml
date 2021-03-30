@@ -1,78 +1,78 @@
 _schema-version: "3.2"
-ID: pluginOnboarding
+ID: pluginswa
 version: 0.0.1
 modules:
-- name: pluginOnboarding-destination-content
+- name: pluginswa-destination-content
   type: com.sap.application.content
   requires:
-  - name: uaa_pluginOnboarding
+  - name: uaa_pluginswa
     parameters:
       service-key:
-        name: uaa_pluginOnboarding-key
-  - name: pluginOnboarding_html_repo_host
+        name: uaa_pluginswa-key
+  - name: pluginswa_html_repo_host
     parameters:
       service-key:
-        name: pluginOnboarding_html_repo_host-key
-  - name: pluginOnboarding-destination-service
+        name: pluginswa_html_repo_host-key
+  - name: pluginswa-destination-service
     parameters:
       content-target: true
   parameters:
     content:
       subaccount:
         destinations:
-        - Name: pluginOnboarding_pluginOnboarding_html_repo_host
-          ServiceInstanceName: pluginOnboarding-html5-app-host-service
-          ServiceKeyName: pluginOnboarding_html_repo_host-key
-          sap.cloud.service: pluginOnboarding
+        - Name: pluginswa_pluginswa_html_repo_host
+          ServiceInstanceName: pluginswa-html5-app-host-service
+          ServiceKeyName: pluginswa_html_repo_host-key
+          sap.cloud.service: pluginswa
         - Authentication: OAuth2UserTokenExchange
-          Name: pluginOnboarding_uaa_pluginOnboarding
-          ServiceInstanceName: pluginOnboarding-xsuaa-service
-          ServiceKeyName: uaa_pluginOnboarding-key
-          sap.cloud.service: pluginOnboarding
+          Name: pluginswa_uaa_pluginswa
+          ServiceInstanceName: pluginswa-xsuaa-service
+          ServiceKeyName: uaa_pluginswa-key
+          sap.cloud.service: pluginswa
         existing_destinations_policy: update
   build-parameters:
     no-source: true
-- name: pluginOnboarding_ui_deployer
+- name: pluginswa_ui_deployer
   type: com.sap.application.content
   path: .
   requires:
-  - name: pluginOnboarding_html_repo_host
+  - name: pluginswa_html_repo_host
     parameters:
       content-target: true
   build-parameters:
     build-result: resources
     requires:
     - artifacts:
-      - pluginOnboarding-content.zip
-      name: pluginOnboarding
+      - pluginswa-content.zip
+      name: pluginswa
       target-path: resources/
-- name: pluginOnboarding
+- name: pluginswa
   type: html5
-  path: pluginOnboarding
+  path: pluginswa
   build-parameters:
     builder: custom
     commands:
     - npm run build
     supported-platforms: []
 resources:
-- name: pluginOnboarding-destination-service
+- name: pluginswa-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
     service: destination
-    service-name: pluginOnboarding-destination-service
+    service-name: pluginswa-destination-service
     service-plan: lite
-- name: pluginOnboarding_html_repo_host
+- name: pluginswa_html_repo_host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
-    service-name: pluginOnboarding-html5-app-host-service
+    service-name: pluginswa-html5-app-host-service
     service-plan: app-host
-- name: uaa_pluginOnboarding
+- name: uaa_pluginswa
   type: org.cloudfoundry.managed-service
   parameters:
     path: ./xs-security.json
     service: xsuaa
-    service-name: pluginOnboarding-xsuaa-service
+    service-name: pluginswa-xsuaa-service
     service-plan: application
 build-parameters:
   before-all:

@@ -1,14 +1,14 @@
 {
     "_version": "1.12.0",
     "sap.app": {
-        "id": "hb4.pluginOnboarding",
+        "id": "hb4.pluginswa",
         "type": "component",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
             "version": "1.0.0"
         },
-        "title": "Plugin onboarding",
-        "description": "Redirección a onboarding si BP no completó el contrato",
+        "title": "Plugin SAP Web Analytics",
+        "description": "Plugin SAP Web Analytics",
         "resources": "resources.json",
         "ach": "ach",
         "sourceTemplate": {
@@ -19,22 +19,15 @@
             "inbounds": {
                 "Shell-plugin": {
                     "signature": {
-                        "parameters": {},
+                        "parameters": { 
+                            "SWA_PUB_TOKEN": { "defaultValue": { "value": "1a433f85-f5ff-4c6d-98e2-b128164d43b5" } },
+                            "SWA_BASE_URL": { "defaultValue": { "value": "https://events.wa.cfapps.eu10.hana.ondemand.com/tracker/" } }
+                        },
                         "additionalParameters": "allowed"
                     },
                     "hideLauncher": true,
                     "semanticObject": "Shell",
                     "action": "plugin"
-                }
-            }
-        },
-        "dataSources": {
-            "mainService": {
-                "uri": "sap/opu/odata/sap/ZOS_HB4_ONBOARDING_SRV/",
-                "type": "OData",
-                "settings": {
-                    "odataVersion": "2.0",
-                    "localUri": "localService/metadata.xml"
                 }
             }
         }
@@ -44,7 +37,7 @@
     },
     "sap.cloud": {
         "public": true,
-        "service": "pluginOnboarding"
+        "service": "pluginswa"
     },
     "sap.ui": {
         "technology": "UI5",
@@ -82,15 +75,6 @@
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
                     "bundleName": "hb4.pluginOnboarding.i18n.i18n"
-                }
-            },
-            "": {
-                "dataSource": "mainService",
-                "preload": true,
-                "settings": {
-                    "defaultBindingMode": "TwoWay",
-                    "defaultCountMode": "Inline",
-                    "refreshAfterChange": false
                 }
             }
         }
